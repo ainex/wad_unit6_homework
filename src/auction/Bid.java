@@ -14,4 +14,22 @@ public class Bid {
     public User user;
     public LocalDateTime bidTime;
     public boolean isWinning;
+
+    public Bid(Product product, BigDecimal amount, int desiredQuantity, User user) {
+        this.product = product;
+        this.amount = amount;
+        this.desiredQuantity = desiredQuantity;
+        this.user = user;
+        this.bidTime = LocalDateTime.now();
+        this.isWinning = false;
+    }
+
+    @Override
+    public String toString() {
+        return "Bid{ product=" + product +
+                ", amount=" + amount +
+                ", desiredQuantity=" + desiredQuantity +
+                ", user=" + user +
+                '}';
+    }
 }
