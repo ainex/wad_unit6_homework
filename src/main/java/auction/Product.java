@@ -2,7 +2,6 @@ package auction;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Created by yfain11 on 4/4/14.
@@ -16,7 +15,7 @@ public class Product {
     public LocalDateTime auctionEndTime;
     public int watchers;
     public BigDecimal minimalPrice;     // Don't sell unless the bid is more than min price
-    public BigDecimal reservedPrice;   // If a bidder offers reserved price, the auction is closed
+    public BigDecimal reservedPrice;   // If a bidder offers reserved price, the main.java.auction is closed
 
     public Product(int id, String title, String thumb, String description, int quantity, LocalDateTime auctionEndTime, int watchers, BigDecimal minimalPrice, BigDecimal reservedPrice) {
         this.id = id;
@@ -54,7 +53,6 @@ public class Product {
                 "title='" + title + '\'' +
                 ", minimalPrice=" + minimalPrice +
                 ", reservedPrice=" + reservedPrice +
-                ", id=" + id +
                 '}';
     }
 }

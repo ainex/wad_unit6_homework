@@ -26,10 +26,9 @@ public class Bid {
 
     @Override
     public String toString() {
-        return "Bid{ product=" + product +
-                ", amount=" + amount +
-                ", desiredQuantity=" + desiredQuantity +
-                ", user=" + user +
+        return " {product:" + product +
+                ", amount:" + amount +
+                ", user:" + user.email +
                 '}';
     }
 }

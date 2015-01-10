@@ -1,8 +1,7 @@
 package auction.emulation;
 
-import auction.User;
 
-import java.util.Collection;
+import auction.User;
 
 /**
  * Created by ainex on 07.01.2015.

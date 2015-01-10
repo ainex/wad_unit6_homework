@@ -1,15 +1,16 @@
+package auction.emulation;
+
+
 import auction.Bid;
-import auction.User;
-import auction.emulation.Bidder;
 import auction.Product;
-import auction.emulation.Notifier;
+import auction.User;
+import auction.engine.BindingEngine;
+import auction.engine.BindingEngineImpl;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class Main {
 
@@ -24,8 +25,10 @@ public class Main {
         users.add(new User("user1", "email_1@mail.com", true));
         users.add(new User("user2", "email_2@mail.com", false));
         users.add(new User("user3", "email_3@mail.com", true));
-        System.out.println(products);
-        Bidder bidder = Bidder.instance(products, bids, users);
+
+        BindingEngine engine = new BindingEngineImpl();
+        engine.config(bids);
+        Bidder bidder = Bidder.instance(products, bids, users, engine);
         bidder.start();
 
 

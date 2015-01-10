@@ -1,8 +1,10 @@
 package auction.emulation;
 
+
 import auction.Bid;
 import auction.Product;
 import auction.User;
+import auction.engine.BindingEngine;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -24,18 +26,20 @@ public class Bidder extends TimerTask {
     private List<Product> products;
     private List<Bid> bids;
     private List<User> users;
+    private BindingEngine engine;
 
-    public static Bidder instance(final List<Product> products, final List<Bid> bids, final List<User> users) {
-        return new Bidder(products, bids, users);
+    public static Bidder instance(final List<Product> products, final List<Bid> bids, final List<User> users, final BindingEngine engine) {
+        return new Bidder(products, bids, users, engine);
 
     }
 
-    private Bidder(final List<Product> products, final List<Bid> bids, final List<User> users) {
-        timer = new Timer(true);
+    private Bidder(final List<Product> products, final List<Bid> bids, final List<User> users, final BindingEngine engine) {
+        timer = new Timer();
         rand = new Random();
         this.products = products;
         this.bids = bids;
         this.users = users;
+        this.engine = engine;
     }
 
     public void start() {
@@ -48,17 +52,10 @@ public class Bidder extends TimerTask {
         int random = rand.nextInt(MAX_PRICE) + MIN_PRICE;
 
         Bid bid = new Bid(products.get(random % products.size()), new BigDecimal(random), 1, users.get(random % users.size()));
-        System.out.println("New bid = " + bid);
-        if (bid.product.minimalPrice.compareTo(bid.amount) > 0) {
-            Notifier.onMinPriceBid(bid.user);
-        } else if (bid.amount.compareTo(bid.product.reservedPrice) >= 0) {
-            Notifier.onReservedPriceBid(bid.user);
-            bids.add(bid);
-        } else {
-            //notify all users who has bids on this product
-            Predicate<Bid> toNotify = b -> b.user.getOverbidNotifications && b.product.equals(bid.product);
-            bids.stream().filter(toNotify).forEach(b -> Notifier.onOverbid(b.user));
-            bids.add(bid);
+        System.out.println("New bid: " + bid);
+       BindingEngine.Result biddingResult = engine.processBid(bid);
+        if(BindingEngine.Result.MAX_PRICE_BID.equals(biddingResult)){
+            System.out.println("End of auction on Product: " + bid.product);
         }
     }
 }

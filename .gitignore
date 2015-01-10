@@ -3,6 +3,19 @@ dist
 .tmp
 .sass-cache
 bower_components
+
+### Gradle ###
+.gradle
+build/
+
+
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+release.properties
+
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
 *.iml
