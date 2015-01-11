@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by ainex on 10.01.2015.
  */
-public interface BindingEngine {
+public interface BidingEngine {
 
 
 
@@ -18,6 +18,6 @@ public interface BindingEngine {
     static enum Result{
         MIN_PRICE_BID,
         MAX_PRICE_BID,
-        OVERBID;
+        VALID_BID;
     }
 }

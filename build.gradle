@@ -13,7 +13,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 // execute the application with ./gradlew run
-mainClassName = "main.java.auction.emulation.Main"
+mainClassName = "main.java.auction.emulation.AuctionBiddingProcessDemo"
 
 // In this section you declare where to find the dependencies of your project
 repositories {
